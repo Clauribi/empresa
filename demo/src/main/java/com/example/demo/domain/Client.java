@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 @Entity ( name = "clients")
 public class Client {
@@ -16,11 +15,14 @@ public class Client {
     @NotNull (message = "address is null")
     @NotBlank ( message = "address is empty")
     private String address;
-    @Positive
-    private int phoneNumber;
+    @NotNull(message = "phone number is null")
+    @NotBlank(message = "phone number is empty")
+    private String phoneNumber;
 
-    public Client (){}
-    public Client(String dni, String name, String address, int phoneNumber) {
+    public Client (){
+
+    }
+    public Client(String dni, String name, String address, String phoneNumber) {
         this.dni = dni;
         this.name = name;
         this.address = address;
@@ -51,11 +53,11 @@ public class Client {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

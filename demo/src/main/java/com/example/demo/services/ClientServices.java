@@ -30,7 +30,7 @@ public class ClientServices {
     public void addInvoiceToClient( InvoiceInput invoiceInput) throws ExceptionClientDoesNotExist, ExceptionInvoiceAlreadyExist {
         if(!clientRepository.existsById(invoiceInput.getClientDni())) throw new ExceptionClientDoesNotExist();
         Invoice b = invoiceInput.invoiceInputToDomain();
-        if(invoiceRepository.existsById(b.getId_reference())) throw new ExceptionInvoiceAlreadyExist();
+        if(invoiceRepository.existsById(b.getIdReference())) throw new ExceptionInvoiceAlreadyExist();
         invoiceRepository.save(b);
     }
 }

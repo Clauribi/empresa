@@ -4,7 +4,6 @@ import com.example.demo.domain.Client;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 public class ClientInput {
     @NotNull(message = "dni is null")
@@ -16,11 +15,11 @@ public class ClientInput {
     @NotNull (message = "address is null")
     @NotBlank ( message = "address is empty")
     private String address;
-    @Positive(message = "phone number is negative")
-    private int phoneNumber;
+    @NotNull(message = "phone number is null")
+    @NotBlank(message = "phone number is empty")
+    private String phoneNumber;
 
-
-    public ClientInput(String dni, String name, String address, int phoneNumber) {
+    public ClientInput(String dni, String name, String address, String phoneNumber) {
         this.dni = dni;
         this.name = name;
         this.address = address;
@@ -51,11 +50,11 @@ public class ClientInput {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

@@ -1,0 +1,1 @@
+alter table clients MODIFY phone_number VARCHAR(9) NOT NULL;

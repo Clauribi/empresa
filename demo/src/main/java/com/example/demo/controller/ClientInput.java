@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Client;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 

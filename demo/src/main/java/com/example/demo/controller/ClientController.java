@@ -30,8 +30,6 @@ public class ClientController {
             return ResponseEntity.status(HttpStatus.IM_USED).build();
         }
     }
-
-
     @PostMapping("/client/invoice")
     public ResponseEntity<String> addInvoiceToClient( @Valid @RequestBody InvoiceInput invoiceInput){
         try{

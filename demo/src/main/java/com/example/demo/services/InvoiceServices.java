@@ -19,17 +19,25 @@ public class InvoiceServices {
     @Autowired
     ClientRepository clientRepository;
 
-   public List<Invoice> listInvoicesForOneClient(String dni) throws ExceptionClientDoesNotHaveInvoices, ExceptionClientDoesNotExist {
+  /* public List<Invoice> listInvoicesForOneClient(String clientDni) throws ExceptionClientDoesNotHaveInvoices, ExceptionClientDoesNotExist {
 
-       if(!clientRepository.existsById(dni))throw new ExceptionClientDoesNotExist();
+       if(!clientRepository.existsById(clientDni))throw new ExceptionClientDoesNotExist();
        List<Invoice> invoices = invoiceRepository.findAll();
        List<Invoice> invoicesById =new ArrayList<>();
        for (Invoice invoice: invoices){
-           if(dni.equals(invoice.getClientDni())){
+           if(clientDni.equals(invoice.getClientDni())){
                invoicesById.add(invoice);
            }
        }
-       if (invoicesById.isEmpty()) throw new ExceptionClientDoesNotHaveInvoices(dni);
+       if (invoicesById.isEmpty()) throw new ExceptionClientDoesNotHaveInvoices(clientDni);
        return invoicesById;
-   }
+   }*/
+  public List<Invoice> listInvoicesForOneClient(String clientDni) throws ExceptionClientDoesNotExist, ExceptionClientDoesNotHaveInvoices {
+      if(!clientRepository.existsById(clientDni))throw new ExceptionClientDoesNotExist();
+      List<Invoice> invoicesOneClient = invoiceRepository.findAllByClientDni(clientDni);
+      if (invoicesOneClient.isEmpty()) throw new ExceptionClientDoesNotHaveInvoices(clientDni);
+      return invoicesOneClient;
+  }
+
+
 }

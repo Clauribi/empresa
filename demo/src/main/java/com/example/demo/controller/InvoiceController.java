@@ -19,10 +19,10 @@ public class InvoiceController {
     @Autowired
     InvoiceServices invoiceServices;
 
-    @GetMapping("/invoices/{dni}")
-    public ResponseEntity<List<Invoice>> listInvoicesForOneClient(@PathVariable String dni){
+    @GetMapping("/invoices/{clientDni}")
+    public ResponseEntity<List<Invoice>> listInvoicesForOneClient(@PathVariable String clientDni){
         try {
-            List<Invoice> invoice = invoiceServices.listInvoicesForOneClient(dni);
+            List<Invoice> invoice = invoiceServices.listInvoicesForOneClient(clientDni);
             return ResponseEntity.ok(invoice);
         } catch (ExceptionClientDoesNotHaveInvoices e){
             e.printStackTrace();

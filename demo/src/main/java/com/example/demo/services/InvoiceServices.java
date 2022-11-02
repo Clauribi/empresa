@@ -8,6 +8,7 @@ import com.example.demo.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,19 +20,6 @@ public class InvoiceServices {
     @Autowired
     ClientRepository clientRepository;
 
-  /* public List<Invoice> listInvoicesForOneClient(String clientDni) throws ExceptionClientDoesNotHaveInvoices, ExceptionClientDoesNotExist {
-
-       if(!clientRepository.existsById(clientDni))throw new ExceptionClientDoesNotExist();
-       List<Invoice> invoices = invoiceRepository.findAll();
-       List<Invoice> invoicesById =new ArrayList<>();
-       for (Invoice invoice: invoices){
-           if(clientDni.equals(invoice.getClientDni())){
-               invoicesById.add(invoice);
-           }
-       }
-       if (invoicesById.isEmpty()) throw new ExceptionClientDoesNotHaveInvoices(clientDni);
-       return invoicesById;
-   }*/
   public List<Invoice> listInvoicesForOneClient(String clientDni) throws ExceptionClientDoesNotExist, ExceptionClientDoesNotHaveInvoices {
       if(!clientRepository.existsById(clientDni))throw new ExceptionClientDoesNotExist();
       List<Invoice> invoicesOneClient = invoiceRepository.findAllByClientDni(clientDni);
@@ -40,4 +28,10 @@ public class InvoiceServices {
   }
 
 
+    public List<Invoice> listInvoicesForOneClientAndDates(String clientDni, Date dateA, Date dateB) throws ExceptionClientDoesNotExist, ExceptionClientDoesNotHaveInvoices {
+        if(!clientRepository.existsById(clientDni))throw new ExceptionClientDoesNotExist();
+        List<Invoice> invoicesByClientAndDate = invoiceRepository.findByClientDniAndDateInvoiceBetween(clientDni, dateA, dateB);
+        if (invoicesByClientAndDate.isEmpty()) throw new ExceptionClientDoesNotHaveInvoices(clientDni);
+        return invoicesByClientAndDate;
+    }
 }

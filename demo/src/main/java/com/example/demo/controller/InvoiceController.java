@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,6 +33,21 @@ public class InvoiceController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @GetMapping("/invoices/{clientDni}/{dateA}/{dateB}")
+    public ResponseEntity<List<Invoice>> listInvoicesForOneClientAndDates(@PathVariable String clientDni, @PathVariable Date dateA, @PathVariable Date dateB){
+        try {
+            List<Invoice> invoice = invoiceServices.listInvoicesForOneClientAndDates(clientDni, dateA, dateB);
+            return ResponseEntity.ok(invoice);
+        } catch (ExceptionClientDoesNotHaveInvoices e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (ExceptionClientDoesNotExist e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 
 }
 

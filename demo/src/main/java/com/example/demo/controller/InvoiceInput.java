@@ -10,10 +10,10 @@ import javax.validation.constraints.Positive;
 import java.sql.Date;
 
 public class InvoiceInput {
-    @Id
-    private String invoiceId;
+
+    private String idReference;
     @NotNull(message = "Invoice date not valid")
-    private Date date1;
+    private Date dateInvoice;
     @Positive(message = "Invoice price not valid")
     private double price;
     @NotNull(message = "Invoices client id not valid")
@@ -24,27 +24,27 @@ public class InvoiceInput {
     }
 
 
-    public InvoiceInput(String invoiceId, Date date1, double price, String clientDni) {
-        this.invoiceId = invoiceId;
-        this.date1 = date1;
+    public InvoiceInput(String idReference, Date dateInvoice, double price, String clientDni) {
+        this.idReference = idReference;
+        this.dateInvoice = dateInvoice;
         this.price = price;
         this.clientDni = clientDni;
     }
 
-    public String getInvoiceId() {
-        return invoiceId;
+    public String getIdReference() {
+        return idReference;
     }
 
-    public void setInvoiceId(String invoiceId) {
-        this.invoiceId = invoiceId;
+    public void setIdReference(String idReference) {
+        this.idReference = idReference;
     }
 
-    public Date getDate1() {
-        return date1;
+    public Date getDateInvoice() {
+        return dateInvoice;
     }
 
-    public void setDate1(Date date1) {
-        this.date1 = date1;
+    public void setDateInvoice(Date dateInvoice) {
+        this.dateInvoice = dateInvoice;
     }
 
     public double getPrice() {
@@ -64,7 +64,7 @@ public class InvoiceInput {
     }
 
     public Invoice invoiceInputToDomain() {
-        Invoice b = new Invoice(this.invoiceId, this.date1, this.price, this.clientDni);
+        Invoice b = new Invoice(this.idReference, this.dateInvoice, this.price, this.clientDni);
         return b;
     }
 }
